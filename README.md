@@ -66,6 +66,35 @@ npm run build
 npm run start
 ```
 
+## Deploy to Netlify (comment)
+- **Netlify UI**: New site from Git → select this repo
+- **Build command**: `npm run build`
+- **Publish directory**: leave empty (Next runtime will handle it)
+- **Environment variables**: set these in Netlify → Site configuration → Environment variables
+  - `MONGODB_URI`
+  - `MONGODB_DB`
+  - `BETTER_AUTH_SECRET`
+  - `BETTER_AUTH_URL` = your Netlify site URL (example: `https://your-site.netlify.app`)
+  - `NEXT_PUBLIC_BETTER_AUTH_URL` = same as above
+  - `NEXT_PUBLIC_APP_URL` = same as above
+  - `GOOGLE_CLIENT_ID` (optional)
+  - `GOOGLE_CLIENT_SECRET` (optional)
+
+## Deploy to Vercel (recommended)
+- **Vercel**: Add New → Project → Import this GitHub repo → Deploy
+- **Framework preset**: Next.js (auto-detected)
+- **Build command**: `npm run build` (default)
+- **Output directory**: leave empty
+- **Environment variables** (Project → Settings → Environment Variables):
+  - `MONGODB_URI`
+  - `MONGODB_DB`
+  - `BETTER_AUTH_SECRET`
+  - `BETTER_AUTH_URL` = `https://<your-project>.vercel.app`
+  - `NEXT_PUBLIC_BETTER_AUTH_URL` = same as above
+  - `NEXT_PUBLIC_APP_URL` = same as above
+  - `GOOGLE_CLIENT_ID` (optional)
+  - `GOOGLE_CLIENT_SECRET` (optional)
+
 ## Notes
 - This project is designed to work with a local MongoDB instance by default.
 - If you use MongoDB Atlas, update `MONGODB_URI` accordingly and ensure network access is configured.
