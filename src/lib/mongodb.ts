@@ -3,11 +3,19 @@ import { MongoClient } from "mongodb";
 const envUri = process.env.MONGODB_URI?.trim();
 const uri = envUri && envUri.length > 0 ? envUri : "mongodb://127.0.0.1:27017";
 
+const isProduction =
+  process.env.NODE_ENV === "production" || process.env.VERCEL === "1";
+
 if (!envUri) {
-  console.warn(
+  const msg =
     "[mongodb] MONGODB_URI is not set. Falling back to mongodb://127.0.0.1:27017. " +
-      "Please set MONGODB_URI in .env.local if your database is not running on the default local address."
-  );
+    "Please set MONGODB_URI in .env.local (local) or in your deployment environment (Vercel).";
+  if (isProduction) {
+    throw new Error(
+      "[mongodb] MONGODB_URI is required in production (e.g. on Vercel)."
+    );
+  }
+  console.warn(msg);
 }
 
 let client: MongoClient | null = null;
