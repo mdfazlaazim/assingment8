@@ -1,65 +1,83 @@
-import Image from "next/image";
+import "animate.css";
 
-export default function Home() {
+import Link from "next/link";
+import Marquee from "react-fast-marquee";
+
+import { BookCard } from "@/components/book-card";
+import { HomeSwiper } from "@/components/home-swiper";
+import type { Book } from "@/types/book";
+
+async function getFeaturedFromApi() {
+  const apiUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+  const response = await fetch(new URL("/api/books?featured=4", apiUrl), {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    return [] as Book[];
+  }
+
+  return (await response.json()) as Book[];
+}
+
+export default async function Home() {
+  const featuredBooks = await getFeaturedFromApi();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="space-y-12">
+      <section className="hero rounded-2xl bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 px-4 py-16">
+        <div className="hero-content text-center">
+          <div className="max-w-2xl">
+            <h1 className="animate__animated animate__fadeInDown text-4xl font-black md:text-5xl">
+              Find Your Next Read
+            </h1>
+            <p className="py-6">
+              Browse a diverse library and borrow books in seconds.
+            </p>
+            <Link href="/all-books" className="btn btn-primary">
+              Browse Now
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <Marquee className="rounded-xl bg-base-200 py-3 text-sm font-semibold">
+        New Arrivals... Fresh picks every week... Borrow instantly... Story, Tech,
+        Science and more...
+      </Marquee>
+
+      <section className="space-y-5">
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold">Featured Books</h2>
+          <Link href="/all-books" className="btn btn-ghost btn-sm">
+            View All
+          </Link>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {featuredBooks.map((book) => (
+            <BookCard key={book.id} book={book} detailHref={`/books/${book.id}`} />
+          ))}
+        </div>
+      </section>
+
+      <HomeSwiper />
+
+      <section className="grid gap-6 md:grid-cols-2">
+        <article className="rounded-2xl bg-base-100 p-6 shadow-sm">
+          <h3 className="text-xl font-bold">Why Readers Choose Us</h3>
+          <p className="mt-3 text-sm leading-7">
+            We make reading accessible with a smooth borrowing flow, rich categories,
+            and a clean responsive dashboard.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+        </article>
+        <article className="rounded-2xl bg-base-100 p-6 shadow-sm">
+          <h3 className="text-xl font-bold">Community Picks</h3>
+          <p className="mt-3 text-sm leading-7">
+            Explore trending books selected by our readers to quickly discover your
+            next favorite title.
+          </p>
+        </article>
+      </section>
     </div>
   );
 }

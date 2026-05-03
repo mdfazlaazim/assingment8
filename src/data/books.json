@@ -1,0 +1,110 @@
+[
+  {
+    "id": "1",
+    "title": "Whispers of the River",
+    "author": "Nora Fields",
+    "description": "A heartfelt story about family, memory, and finding courage in a small riverside town.",
+    "category": "Story",
+    "available_quantity": 6,
+    "image_url": "https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": "2",
+    "title": "Modern TypeScript Patterns",
+    "author": "Rafiq Alam",
+    "description": "Practical techniques for writing safer and cleaner TypeScript in large-scale apps.",
+    "category": "Tech",
+    "available_quantity": 9,
+    "image_url": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": "3",
+    "title": "Stars Beyond Us",
+    "author": "Lena Voss",
+    "description": "An accessible guide to astrophysics that explains the universe with vivid examples.",
+    "category": "Science",
+    "available_quantity": 5,
+    "image_url": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": "4",
+    "title": "The Last Lantern",
+    "author": "Maya Quinn",
+    "description": "A moving coming-of-age tale set in a mountain village preparing for an ancient festival.",
+    "category": "Story",
+    "available_quantity": 4,
+    "image_url": "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": "5",
+    "title": "Cloud Native Essentials",
+    "author": "Adrian Cole",
+    "description": "Covers containers, orchestration, and deployment workflows for modern distributed systems.",
+    "category": "Tech",
+    "available_quantity": 7,
+    "image_url": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": "6",
+    "title": "Biology of Everyday Life",
+    "author": "Sonia Patel",
+    "description": "Explores biology concepts through food, sleep, stress, and daily human behavior.",
+    "category": "Science",
+    "available_quantity": 8,
+    "image_url": "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": "7",
+    "title": "Echoes in Autumn",
+    "author": "Imran Malik",
+    "description": "A layered mystery novel where old letters reveal a town's forgotten history.",
+    "category": "Story",
+    "available_quantity": 3,
+    "image_url": "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": "8",
+    "title": "Secure Coding by Design",
+    "author": "Priya Nair",
+    "description": "Shows how to design applications with security-first architecture and testing.",
+    "category": "Tech",
+    "available_quantity": 10,
+    "image_url": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": "9",
+    "title": "Ocean Currents and Climate",
+    "author": "Diego Hart",
+    "description": "A science read on how ocean systems influence weather, ecosystems, and global climate.",
+    "category": "Science",
+    "available_quantity": 6,
+    "image_url": "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": "10",
+    "title": "Midnight Library Lane",
+    "author": "Hina Sultana",
+    "description": "A story of friendship and second chances centered around an old neighborhood library.",
+    "category": "Story",
+    "available_quantity": 5,
+    "image_url": "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": "11",
+    "title": "Practical System Design",
+    "author": "Jonas Reed",
+    "description": "Breaks down scalable architectures with real examples from production systems.",
+    "category": "Tech",
+    "available_quantity": 7,
+    "image_url": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": "12",
+    "title": "Quantum Basics Illustrated",
+    "author": "Elena Brooks",
+    "description": "Introduces quantum mechanics with approachable visuals and intuitive explanations.",
+    "category": "Science",
+    "available_quantity": 4,
+    "image_url": "https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=900&q=80"
+  }
+]
