@@ -3,13 +3,13 @@ import type { BookCategory } from "@/types/book";
 import { getBooks } from "@/lib/books";
 
 type SearchProps = {
-  searchParams?: { q?: string; category?: string };
+  searchParams?: Promise<{ q?: string; category?: string }>;
 };
 
 const categories: Array<BookCategory | "All"> = ["All", "Story", "Tech", "Science"];
 
 export default async function AllBooksPage({ searchParams }: SearchProps) {
-  const params = searchParams ?? {};
+  const params = (await searchParams) ?? {};
   const query = params.q ?? "";
   const categoryParam = params.category;
   const category =
