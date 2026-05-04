@@ -5,23 +5,11 @@ import Marquee from "react-fast-marquee";
 
 import { BookCard } from "@/components/book-card";
 import { HomeSwiper } from "@/components/home-swiper";
+import { getFeaturedBooks } from "@/lib/books";
 import type { Book } from "@/types/book";
 
-async function getFeaturedFromApi() {
-  const apiUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-  const response = await fetch(new URL("/api/books?featured=4", apiUrl), {
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    return [] as Book[];
-  }
-
-  return (await response.json()) as Book[];
-}
-
 export default async function Home() {
-  const featuredBooks = await getFeaturedFromApi();
+  const featuredBooks: Book[] = getFeaturedBooks(4);
 
   return (
     <div className="space-y-12">

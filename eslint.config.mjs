@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local utility scripts (not part of app build):
+    "tmp-*.js",
   ]),
 ]);
 
