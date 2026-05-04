@@ -6,12 +6,14 @@ function getMissingAuthEnv() {
   const mongoUri = process.env.MONGODB_URI?.trim();
   const authSecret = process.env.BETTER_AUTH_SECRET?.trim();
   const authBaseURL =
-    process.env.BETTER_AUTH_URL?.trim() || process.env.NEXT_PUBLIC_BETTER_AUTH_URL?.trim();
+    process.env.BETTER_AUTH_URL?.trim() ||
+    process.env.NEXT_PUBLIC_BETTER_AUTH_URL?.trim() ||
+    (process.env.VERCEL_URL?.trim() ? `https://${process.env.VERCEL_URL.trim()}` : undefined);
 
   const missing: string[] = [];
   if (!mongoUri) missing.push("MONGODB_URI");
   if (!authSecret) missing.push("BETTER_AUTH_SECRET");
-  if (!authBaseURL) missing.push("BETTER_AUTH_URL (or NEXT_PUBLIC_BETTER_AUTH_URL)");
+  if (!authBaseURL) missing.push("BETTER_AUTH_URL (or NEXT_PUBLIC_BETTER_AUTH_URL, or VERCEL_URL)");
   return missing;
 }
 
@@ -39,6 +41,7 @@ async function handler(request: Request) {
     return new Response(
       JSON.stringify({
         error: "MongoDB is not reachable from the server.",
+        details: mongo.error,
         hint: "Ensure MONGODB_URI points to MongoDB Atlas/hosted DB and Atlas Network Access allows your deployment (e.g. 0.0.0.0/0 for testing). Then redeploy.",
       }),
       {

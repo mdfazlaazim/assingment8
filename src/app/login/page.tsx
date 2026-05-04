@@ -53,9 +53,10 @@ export default function LoginPage() {
       toast.success("Login successful");
       router.push("/");
       router.refresh();
-    } catch {
+    } catch (err) {
       setLoading(false);
-      toast.error("Server issue. MongoDB (Atlas) connection check kore abar try koro.");
+      const message = err instanceof Error ? err.message : String(err);
+      toast.error(getReadableError(message));
     }
   };
 
