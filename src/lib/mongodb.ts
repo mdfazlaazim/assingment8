@@ -21,6 +21,8 @@ export function getMongoClient() {
   const options = {
     tls: uri.startsWith("mongodb+srv://"),
     serverApi: { version: "1" as const },
+    // Fail fast in serverless (Vercel) when DB isn't reachable.
+    serverSelectionTimeoutMS: 5000,
   };
 
   client = new MongoClient(uri, options);
@@ -35,4 +37,21 @@ export function getMongoDb() {
   getMongoClient();
   clientPromise?.catch(() => undefined);
   return client!.db(process.env.MONGODB_DB ?? "assignment8");
+}
+
+export async function checkMongoConnection() {
+  try {
+    getMongoClient();
+    const connected = await clientPromise;
+    if (!connected) {
+      return { ok: false as const, error: "MongoDB connection failed." };
+    }
+
+    const db = getMongoDb();
+    await db.admin().command({ ping: 1 });
+    return { ok: true as const };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    return { ok: false as const, error: message };
+  }
 }

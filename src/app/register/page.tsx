@@ -19,7 +19,7 @@ function getReadableError(message?: string) {
     text.includes("server selection") ||
     text.includes("mongo")
   ) {
-    return "MongoDB connection problem: .env.local e MONGODB_URI set koro ar database run korteso kina check koro.";
+    return "MongoDB connection problem: Vercel e MONGODB_URI (Atlas) set koro + Atlas Network Access allow koro (0.0.0.0/0 for testing).";
   }
   return message ?? "Registration failed";
 }
@@ -57,7 +57,7 @@ export default function RegisterPage() {
       router.refresh();
     } catch {
       setLoading(false);
-      toast.error("Server issue. MongoDB connection check kore abar try koro.");
+      toast.error("Server issue. MongoDB (Atlas) connection check kore abar try koro.");
     }
   };
 

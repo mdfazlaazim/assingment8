@@ -1,5 +1,7 @@
 import { toNextJsHandler } from "better-auth/next-js";
 
+import { checkMongoConnection } from "@/lib/mongodb";
+
 function getMissingAuthEnv() {
   const mongoUri = process.env.MONGODB_URI?.trim();
   const authSecret = process.env.BETTER_AUTH_SECRET?.trim();
@@ -21,6 +23,23 @@ async function handler(request: Request) {
         error: "Auth is not configured on the server.",
         missing,
         hint: "Set these Environment Variables in Vercel/Netlify and redeploy.",
+      }),
+      {
+        status: 500,
+        headers: {
+          "content-type": "application/json; charset=utf-8",
+          "cache-control": "no-store",
+        },
+      },
+    );
+  }
+
+  const mongo = await checkMongoConnection();
+  if (!mongo.ok) {
+    return new Response(
+      JSON.stringify({
+        error: "MongoDB is not reachable from the server.",
+        hint: "Ensure MONGODB_URI points to MongoDB Atlas/hosted DB and Atlas Network Access allows your deployment (e.g. 0.0.0.0/0 for testing). Then redeploy.",
       }),
       {
         status: 500,
